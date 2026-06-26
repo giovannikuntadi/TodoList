@@ -8,14 +8,24 @@ export function TodoPage() {
   const [tasks, setTasks] = useState([
     new Task('Implementasi halaman Register', false),
     new Task('Build halaman Dashboard', false),
-    new Task('Build halaman Dashboard', true),
+    new Task('Komponen To-Do List (Add, Edit, Delete Task)', true),
   ]);
   // const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
   function handleClickAddButton(inputValue) {
     setInputValue(inputValue);
-    // console.log(inputValue);
+
+    setTasks((prevTask) => {
+      const newTask = { name: inputValue, isCompleted: false };
+      return [...prevTask, newTask];
+    });
+  }
+
+  function handleCheckboxToggleCompletion(isCheckboxChecked, item) {
+    setTasks((prevTask) =>
+      prevTask.map((task) => (task.id === item.id ? { ...task, isCompleted: isCheckboxChecked } : task)),
+    );
   }
 
   return (
@@ -27,7 +37,7 @@ export function TodoPage() {
         completed={tasks.filter((task) => task.isCompleted !== false).length}
       />
       <TodoInput onClickAddButton={handleClickAddButton} />
-      <TodoMain tasks={tasks} />
+      <TodoMain tasks={tasks} onCheckboxToggleCompletion={handleCheckboxToggleCompletion} />
     </main>
   );
 }

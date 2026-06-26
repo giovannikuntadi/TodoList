@@ -8,7 +8,7 @@ export function TodoInput({ onClickAddButton }) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   function handleChangeOnInput(e) {
-    const value = e.target.value.trim();
+    const value = e.target.value;
     value.length !== 0 ? setIsButtonDisabled(false) : setIsButtonDisabled(true);
     setInputValue(value);
   }

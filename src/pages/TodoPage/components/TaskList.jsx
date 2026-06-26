@@ -1,7 +1,11 @@
 import iconEmptyTask from '@/assets/images/icon-empty-task.svg';
 import { TaskItem } from './TaskItem';
 
-export function TaskList({ tasks }) {
+export function TaskList({ tasks, onCheckboxToggleCompletion }) {
+  function handleCheckboxToggleCompletion(isCheckboxChecked, item) {
+    onCheckboxToggleCompletion(isCheckboxChecked, item);
+  }
+
   return (
     <>
       {tasks.length === 0 ? (
@@ -20,7 +24,7 @@ export function TaskList({ tasks }) {
       ) : (
         <>
           <ul className="flex flex-col gap-2.5">
-            <TaskItem tasks={tasks} />
+            <TaskItem tasks={tasks} onCheckboxToggleCompletion={handleCheckboxToggleCompletion} />
           </ul>
         </>
       )}
