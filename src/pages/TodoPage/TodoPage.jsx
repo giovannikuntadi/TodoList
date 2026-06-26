@@ -13,6 +13,12 @@ export function TodoPage() {
   // const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
+  const Stats = Object.freeze({
+    ALL: tasks.length,
+    ONGOING: tasks.filter((task) => !task.isCompleted).length,
+    COMPLETED: tasks.filter((task) => task.isCompleted).length,
+  });
+
   function handleClickAddButton(inputValue) {
     setInputValue(inputValue);
 
@@ -31,11 +37,7 @@ export function TodoPage() {
   return (
     <main className="mx-auto mt-9 flex h-165 w-150 flex-col rounded-3xl border-2 border-white bg-[#f9f9f9]">
       <h1 className="p-4.5 text-2xl font-semibold text-black">Todolist</h1>
-      <TodoStats
-        total={tasks.length}
-        ongoing={tasks.filter((task) => task.isCompleted !== true).length}
-        completed={tasks.filter((task) => task.isCompleted !== false).length}
-      />
+      <TodoStats total={Stats.ALL} ongoing={Stats.ONGOING} completed={Stats.COMPLETED} />
       <TodoInput onClickAddButton={handleClickAddButton} />
       <TodoMain tasks={tasks} onCheckboxToggleCompletion={handleCheckboxToggleCompletion} />
     </main>

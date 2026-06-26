@@ -5,9 +5,6 @@ import iconTrash from '@/assets/images/icon-trash.svg';
 export function TaskItem({ tasks, onCheckboxToggleCompletion }) {
   function handleToggleCompletion(isCheckboxChecked, item) {
     onCheckboxToggleCompletion(isCheckboxChecked, item);
-    // console.log(item);
-    // console.log(e.currentTarget.value);
-    // console.log(isCheckboxChecked);
   }
 
   return (
