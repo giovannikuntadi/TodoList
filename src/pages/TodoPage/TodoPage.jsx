@@ -53,7 +53,7 @@ export function TodoPage() {
     setInputValue(inputValue);
 
     setTasks((prevTask) => {
-      const newTask = { name: inputValue, isCompleted: false };
+      const newTask = new Task(inputValue, false);
       return [...prevTask, newTask];
     });
   }
