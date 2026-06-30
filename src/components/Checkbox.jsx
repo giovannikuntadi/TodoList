@@ -1,14 +1,14 @@
 import iconCheck from '@/assets/images/icon-check.svg';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export function Checkbox({ onToggleCompletion, item }) {
   const [isChecked, setIsChecked] = useState(item.isCompleted);
 
-  function handleClick() {
+  const handleClick = useCallback(() => {
     const isCheckboxChecked = !isChecked;
     setIsChecked(isCheckboxChecked);
     onToggleCompletion(isCheckboxChecked, item);
-  }
+  });
 
   return (
     <span

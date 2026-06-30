@@ -1,5 +1,6 @@
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TaskList } from './TaskList';
+import { useCallback } from 'react';
 
 export function TodoMain({
   tasks,
@@ -10,21 +11,21 @@ export function TodoMain({
   onClickEditTask,
   onClickDeleteTask,
 }) {
-  function handleSelectSegment(index) {
+  const handleSelectSegment = useCallback((index) => {
     onSelectSegment(index);
-  }
+  });
 
-  function handleCheckboxToggleCompletion(isCheckboxChecked, item) {
+  const handleCheckboxToggleCompletion = useCallback((isCheckboxChecked, item) => {
     onCheckboxToggleCompletion(isCheckboxChecked, item);
-  }
+  });
 
-  function handleClickEditTask(selectedTask) {
+  const handleClickEditTask = useCallback((selectedTask) => {
     onClickEditTask(selectedTask);
-  }
+  });
 
-  function handleClickDeleteTask(selectedTask) {
+  const handleClickDeleteTask = useCallback((selectedTask) => {
     onClickDeleteTask(selectedTask);
-  }
+  });
 
   return (
     <section className="flex h-106 flex-col p-2">

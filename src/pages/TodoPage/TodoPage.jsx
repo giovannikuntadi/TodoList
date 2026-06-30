@@ -1,7 +1,7 @@
 import { TodoStats } from './components/TodoStats';
 import { TodoInput } from './components/TodoInput';
 import { TodoMain } from './components/TodoMain';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Task } from '@/data/models/Task';
 
 export function TodoPage() {
@@ -35,7 +35,7 @@ export function TodoPage() {
 
   const availableStatuses = [Statuses.ALL, Statuses.ACTIVE, Statuses.COMPLETED];
 
-  function getVisibleTasks(index) {
+  const getVisibleTasks = useCallback((index) => {
     switch (index) {
       case 0:
         return Tasks.ALL;
@@ -47,36 +47,36 @@ export function TodoPage() {
         return Tasks.COMPLETED;
         break;
     }
-  }
+  });
 
-  function handleClickAddButton(inputValue) {
+  const handleClickAddButton = useCallback((inputValue) => {
     setInputValue(inputValue);
 
     setTasks((prevTask) => {
       const newTask = new Task(inputValue, false);
       return [...prevTask, newTask];
     });
-  }
+  });
 
-  function handleSelectSegment(index) {
+  const handleSelectSegment = useCallback((index) => {
     if (selectedSegmentIndex !== index) {
       setSelectedSegmentIndex(index);
     }
-  }
+  });
 
-  function handleCheckboxToggleCompletion(isCheckboxChecked, item) {
+  const handleCheckboxToggleCompletion = useCallback((isCheckboxChecked, item) => {
     setTasks((prevTask) =>
       prevTask.map((task) => (task.id === item.id ? { ...task, isCompleted: isCheckboxChecked } : task)),
     );
-  }
+  });
 
-  function handleClickEditTask(selectedTask) {
+  const handleClickEditTask = useCallback((selectedTask) => {
     console.log(selectedTask);
-  }
+  });
 
-  function handleClickDeleteTask(selectedTask) {
+  const handleClickDeleteTask = useCallback((selectedTask) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== selectedTask.id));
-  }
+  });
 
   return (
     <main className="mx-auto mt-9 flex h-165 w-150 flex-col rounded-3xl border-2 border-white bg-[#f9f9f9]">

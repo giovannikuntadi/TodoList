@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 function Segment({ label, isSelected, index, onSelectSegment }) {
-  function handleClick() {
+  const handleClick = useCallback(() => {
     onSelectSegment(index);
-  }
+  });
 
   return (
     <button
@@ -16,9 +16,9 @@ function Segment({ label, isSelected, index, onSelectSegment }) {
 }
 
 export function SegmentedControl({ segments, selectedSegmentIndex, onSelectSegment }) {
-  function handleSelectSegment(index) {
+  const handleSelectSegment = useCallback((index) => {
     onSelectSegment(index);
-  }
+  });
 
   return (
     <div className="flex w-60 rounded-md bg-neutral-50 p-0.5">

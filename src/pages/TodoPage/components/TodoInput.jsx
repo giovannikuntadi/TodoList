@@ -1,23 +1,23 @@
 import iconPenLine from '@/assets/images/icon-pen-line.svg';
 import iconPlusDisabled from '@/assets/images/icon-plus-disabled.svg';
 import iconPlusEnabled from '@/assets/images/icon-plus-enabled.svg';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function TodoInput({ onClickAddButton }) {
   const [inputValue, setInputValue] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  function handleChangeOnInput(e) {
+  const handleChangeOnInput = useCallback((e) => {
     const value = e.target.value;
     value.length !== 0 ? setIsButtonDisabled(false) : setIsButtonDisabled(true);
     setInputValue(value);
-  }
+  });
 
-  function handleClickAdd() {
+  const handleClickAdd = useCallback(() => {
     onClickAddButton(inputValue);
     setInputValue('');
     setIsButtonDisabled(true);
-  }
+  });
 
   return (
     <section className="flex items-center gap-3 px-4.5 py-2.5">

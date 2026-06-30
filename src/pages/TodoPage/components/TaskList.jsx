@@ -1,18 +1,19 @@
 import iconEmptyTask from '@/assets/images/icon-empty-task.svg';
 import { TaskItem } from './TaskItem';
+import { useCallback } from 'react';
 
 export function TaskList({ tasks, onCheckboxToggleCompletion, onClickEditTask, onClickDeleteTask }) {
-  function handleCheckboxToggleCompletion(isCheckboxChecked, item) {
+  const handleCheckboxToggleCompletion = useCallback((isCheckboxChecked, item) => {
     onCheckboxToggleCompletion(isCheckboxChecked, item);
-  }
+  });
 
-  function handleClickEdit(selectedTask) {
+  const handleClickEdit = useCallback((selectedTask) => {
     onClickEditTask(selectedTask);
-  }
+  });
 
-  function handleClickDelete(selectedTask) {
+  const handleClickDelete = useCallback((selectedTask) => {
     onClickDeleteTask(selectedTask);
-  }
+  });
 
   return (
     <>
