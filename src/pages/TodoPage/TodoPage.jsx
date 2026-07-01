@@ -5,14 +5,8 @@ import { useCallback, useState } from 'react';
 import { Task } from '@/data/models/Task';
 
 export function TodoPage() {
-  // const [tasks, setTasks] = useState([
-  //   new Task('Implementasi halaman Register', false),
-  //   new Task('Build halaman Dashboard', false),
-  //   new Task('Komponen To-Do List (Add, Edit, Delete Task)', true),
-  // ]);
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
-
   const [selectedSegmentIndex, setSelectedSegmentIndex] = useState(0);
 
   const Tasks = Object.freeze({
@@ -35,6 +29,9 @@ export function TodoPage() {
 
   const availableStatuses = [Statuses.ALL, Statuses.ACTIVE, Statuses.COMPLETED];
 
+  /**
+   * @param {number} index
+   */
   const getVisibleTasks = useCallback(index => {
     switch (index) {
       case 0:
@@ -49,6 +46,9 @@ export function TodoPage() {
     }
   });
 
+  /**
+   * @param {string} inputValue
+   */
   const handleClickAddButton = useCallback(inputValue => {
     setInputValue(inputValue);
 
@@ -58,22 +58,38 @@ export function TodoPage() {
     });
   });
 
+  /**
+   * @param {number} index
+   */
   const handleSelectSegment = useCallback(index => {
     if (selectedSegmentIndex !== index) {
       setSelectedSegmentIndex(index);
     }
   });
 
+  /**
+   * @param {boolean} isCheckboxChecked
+   * @param {{id: string, name: string, isCompleted: boolean}} item
+   */
   const handleCheckboxToggleCompletion = useCallback((isCheckboxChecked, item) => {
     setTasks(prevTask =>
       prevTask.map(task => (task.id === item.id ? { ...task, isCompleted: isCheckboxChecked } : task)),
     );
   });
 
+  /**
+   * @param {string} inputValue
+   * @param {string} editingTaskId
+   */
   const handleSuccessChangeTask = useCallback((inputValue, editingTaskId) => {
-    setTasks(prevTasks => prevTasks.map(task => (task.id === editingTaskId ? { ...task, name: inputValue } : task)));
+    if (inputValue !== '') {
+      setTasks(prevTasks => prevTasks.map(task => (task.id === editingTaskId ? { ...task, name: inputValue } : task)));
+    }
   });
 
+  /**
+   * @param {{id: string, name: string, isCompleted: boolean}} selectedTask
+   */
   const handleClickDeleteTask = useCallback(selectedTask => {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== selectedTask.id));
   });

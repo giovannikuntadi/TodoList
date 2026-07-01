@@ -4,15 +4,25 @@ const WidgetStatus = Object.freeze({
   DONE: 'bg-linear-to-b from-[#85E980] to-[#4D9A44] text-[#D8F4D6]',
 });
 
-export function StatWidget(props) {
+/**
+ * @typedef {Object} StatWidget
+ */
+
+/**
+ * @param {string} variant
+ * @param {string} icon
+ * @param {string} label
+ * @param {number} count
+ */
+export function StatWidget({ variant, icon, label, count }) {
   return (
-    <div className={`flex flex-1 flex-col gap-2 rounded-lg ${WidgetStatus[props.variant]} p-3`}>
+    <div className={`flex flex-1 flex-col gap-2 rounded-lg ${WidgetStatus[variant]} p-3`}>
       <div>
-        <img src={props.icon} alt="Task Icon" />
+        <img src={icon} alt="Task Icon" />
       </div>
       <div className="flex items-end justify-between">
-        <span className="text-sm font-semibold">{props.label}</span>
-        <span className="text-[40px] leading-none font-semibold">{props.count}</span>
+        <span className="text-sm font-semibold">{label}</span>
+        <span className="text-[40px] leading-none font-semibold">{count}</span>
       </div>
     </div>
   );
